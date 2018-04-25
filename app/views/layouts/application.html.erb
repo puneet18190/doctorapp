@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DoctorCreds</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/assets/mystyle.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Doctor Creds</a>
+        </div>
+        <ul class="nav navbar-nav" style="width:90%">
+          <li class="active"><a href="/">Home</a></li>
+          <li class="active"><a href="/certificate">Certificate</a></li>
+          <li class="active"><a href="/citizenship_certificate">Citizenship Certificate</a></li>
+          <li class="active"><a href="/dc_ref_form">DC Ref Form</a></li>
+          <li class="active"><a href="/hepb">HepB</a></li>
+          <li class="active"><a href="/id_state_gov_doc">ID State Gov Doc</a></li>
+          <li class="active"><a href="/id_documents">ID Documents</a></li>
+          <li class="active"><a href="/id_documents_birth_card">Birth Card</a></li>
+          <li class="active"><a href="/id_documents_birth_cert">Birth Cert</a></li>
+          <li class="active"><a href="/id_documents_citizenship_cert">Citizenship Cert</a></li>
+          <li class="active"><a href="/id_documents_driver_photo_liecence">Driver Liecence</a></li>
+          <li class="active"><a href="/id_documents_public_employee">Public Employee</a></li>
+          <li class="active"><a href="/id_documents_passport">Passport</a></li>
+          <li class="active"><a href="/id_documents_student_id">Student ID</a></li>
+          <li class="active"><a href="/influenza">Influenza</a></li>
+          <li class="active"><a href="/mmr">MMR</a></li>
+          <li class="active"><a href="/medical_indemnity">MedicalIndemnity</a></li>
+          <li class="active"><a href="/order_page">Order Page</a></li>
+          <% if user_signed_in? %>
+            <li class="pull-right"><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+            <li class="pull-right"><a href="#">Logged in as <%= current_user.email %></a></li>
+          <%else%>
+            <li class="pull-right"><%= link_to "Login", new_user_session_path %></li>
+          <%end%>
+        </ul>
+      </div>
+    </nav>
+
+    <% if notice %><p class="notice"><%= notice %></p><%end%>
+    <% if alert %><p class="alert"><%= alert %></p><%end%>
+    <div class="container">
+      <%= yield %>
+    </div>
+  </body>
+</html>

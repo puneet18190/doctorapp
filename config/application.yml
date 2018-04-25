@@ -1,0 +1,12 @@
+defaults: &defaults
+  FILESTACK_EMAIL: 'kerriedudley74@gmail.com'
+  FILESTACK_KEY: 'kARGphPmj9B3'
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
