@@ -3,10 +3,50 @@
 <h2>To start saving your documents, please click on one of the following folders.</h2>
 
 <ui>
-	<img src="https://www.doctorcreds.com/documents"><button style="font-size:24px">Documents <i class="material-icons">folder</i></button><br><br />
-	<img src="https://www.doctorcreds.com/Certificates"><button style="font-size:24px">Certificates <i class="material-icons">book</i></button><br><br />
-	<img src="https://www.doctorcreds.com/Vaccination_Label"><button style="font-size:24px">Vaccinations <i class="material-icons">local_hospital</i></button><br><br />
-	<img src="https://www.doctorcreds.com/Provider-Prescriber_Label"><button style="font-size:24px">Provider/Prescriber <i class="material-icons">create_new_folder</i></button><br><br />
-	<img src="https://www.doctorcreds.com/documents"><button style="font-size:24px">Identity <i class="material-icons">assignment_ind</i></button><br><br />
-	<img src="https://www.doctorcreds.com/documents"><button style="font-size:24px">Notes <i class="material-icons">folder_open</i></button><br><br />
+	<img src="https://www.doctorcreds.com/documents">
+	<!-- <button style="font-size:24px">Documents <i class="material-icons">folder</i></button><br><br /> -->
+	<%= filestack_picker_element 'Documents <i class="material-icons">folder</i>'.html_safe, 'callbackForButton', class: 'doc_btn', id: 'documents',style: "font-size:24px" %><br><br>
+
+	<img src="https://www.doctorcreds.com/Certificates">
+	<!-- <button style="font-size:24px">Certificates <i class="material-icons">book</i></button><br><br /> -->
+	<%= filestack_picker_element 'Certificates <i class="material-icons">folder</i>'.html_safe, 'callbackForButton', class: 'doc_btn', id: 'certificates',style: "font-size:24px" %><br><br>
+	
+	<img src="https://www.doctorcreds.com/Vaccination_Label">
+	<!-- <button style="font-size:24px">Vaccinations <i class="material-icons">local_hospital</i></button><br><br /> -->
+	<%= filestack_picker_element 'Vaccinations <i class="material-icons">folder</i>'.html_safe, 'callbackForButton', class: 'doc_btn', id: 'vaccinations',style: "font-size:24px" %><br><br>
+	
+	<img src="https://www.doctorcreds.com/Provider-Prescriber_Label">
+	<!-- <button style="font-size:24px">Provider/Prescriber <i class="material-icons">create_new_folder</i></button><br><br /> -->
+	<%= filestack_picker_element 'Provider/Prescriber <i class="material-icons">folder</i>'.html_safe, 'callbackForButton', class: 'doc_btn', id: 'provider',style: "font-size:24px" %><br><br>
+	
+	<img src="https://www.doctorcreds.com/documents">
+	<!-- <button style="font-size:24px">Identity <i class="material-icons">assignment_ind</i></button><br><br /> -->
+	<%= filestack_picker_element 'Identity <i class="material-icons">folder</i>'.html_safe, 'callbackForButton', class: 'doc_btn', id: 'identity',style: "font-size:24px" %><br><br>
+	
+	<img src="https://www.doctorcreds.com/documents">
+	<!-- <button style="font-size:24px">Notes <i class="material-icons">folder_open</i></button><br><br /> -->
+	<%= filestack_picker_element 'Notes <i class="material-icons">folder</i>'.html_safe, 'callbackForButton', class: 'doc_btn', id: 'notes',style: "font-size:24px" %><br><br>
 </ui>
+
+<%= hidden_field_tag :doc_type %>
+
+<script type="text/javascript">
+	function callbackForButton(data){
+		doc_url = data.filesUploaded[0].url
+		doc_type = $("#doc_type").val()
+		$.ajax({
+			type: 'post',
+			url: '/save_documents',
+			data: 'doc_url='+doc_url+'&doc_type='+doc_type,
+			success: function(){
+				console.log(data);
+			}
+		})
+	}
+
+	$(function(){
+		$('.doc_btn').click(function(){
+			$("#doc_type").val($(this).attr('id'))
+		})
+	})
+</script>

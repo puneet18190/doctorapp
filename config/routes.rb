@@ -21,4 +21,6 @@ Rails.application.routes.draw do
   match 'mmr' => 'home#mmr', via: :get
   match 'medical_indemnity' => 'home#medical_indemnity', via: :get
   match 'order_page' => 'home#order_page', via: :get
+
+  match 'save_documents' => 'home#save_documents', via: :post
 end

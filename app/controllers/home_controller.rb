@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+  skip_before_action :verify_authenticity_token, :only => [:save_documents]
   before_action :authenticate_user!
   def index
   end
@@ -49,5 +50,10 @@ class HomeController < ApplicationController
   end
 
   def order_page
+  end
+
+  def save_documents
+    current_user.documents.create(name: params[:doc_url],doc_type: params[:doc_type])
+    render json: {status: true}
   end
 end
